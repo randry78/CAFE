@@ -1,4 +1,3 @@
-const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
 export class Produits{
     

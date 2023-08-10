@@ -37,8 +37,10 @@ export class WishList{
     async clear(){
         const url= this.urlBase+'wishlist/clear';
         const response= await fetch(url, {method: 'DELETE'});
+
         if (!response.ok) {
-            throw new Error(response);
+            const error= await response.json();
+            throw error;
         }
     }
 }
