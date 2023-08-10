@@ -9,8 +9,8 @@ export class Suggestions{
         const url= this.urlBase+'suggestions/recently-viewed-products';
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const suggestions= await response.json();
         return suggestions;
@@ -20,8 +20,8 @@ export class Suggestions{
         const url= this.urlBase+'suggestions/recently-viewed-products/' + id;
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const suggestion= await response.json();
         return suggestion;

@@ -10,53 +10,51 @@ export class Carts{
         const url= this.urlBase+'cart';
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const carts= await response.json();
         return carts;
     }
 
     async update(productId, quantity){
-        const url= this.urlBase+'/cart/modify-product-quantity/'+ productId;
+        const url= this.urlBase+'cart/modify-product-quantity/'+ productId;
         const response= await fetch(url, {method: 'PATCH', body: JSON.stringify({quantity: quantity}), 
                                           headers: {'Content-type': 'application/json; charset=UTF-8'}
                                     });
         if (!response.ok) {
-            throw new Error(response);
+            const error= await response.json();
+            throw error;
         }
     }
 
-    /*async searchProducts(motcle){
-        const url= this.urlBase+'products?search=' + motcle;
-        const response= await fetch(url, {method:'GET'});
+    async add(productId, quantity){
+        const url= this.urlBase+'cart/add-product';
+        const response= await fetch(url, {method: 'POST', body: JSON.stringify({productId: productId, quantity: quantity}), 
+                        headers: {'Content-type': 'application/json; charset=UTF-8'}
+                    });
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
-        const products= await response.json();
-        return products;
     }
 
-    async getCategories(){
-        const url= this.urlBase+'product-categories';
-        const response= await fetch(url, {method:'GET'});
+    async delete(id){
+        const url= this.urlBase+'cart/remove-product/' + id;
+        const response= await fetch(url, {method: 'DELETE'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
-        const categories= await response.json();
-        return categories;
     }
 
-    async getColors(){
-        const url= this.urlBase+'product-colors';
-        const response= await fetch(url, {method:'GET'});
+    async clear(){
+        const url= this.urlBase+'cart/clear';
+        const response= await fetch(url, {method: 'DELETE'});
+
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
-        const colors= await response.json();
-        return colors;
-    }*/
+    }
 }

@@ -11,8 +11,8 @@ export class Produits{
         const url= this.urlBase+'products';
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const products= await response.json();
         return products;
@@ -28,8 +28,8 @@ export class Produits{
         const url= this.urlBase+'products/'+ id;
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const product= await response.json();
         return product;
@@ -39,8 +39,8 @@ export class Produits{
         const url= this.urlBase+'products?search=' + motcle;
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const products= await response.json();
         return products;
@@ -50,8 +50,8 @@ export class Produits{
         const url= this.urlBase+'product-categories';
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const categories= await response.json();
         return categories;
@@ -61,8 +61,8 @@ export class Produits{
         const url= this.urlBase+'product-colors';
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
-            const message = 'Ooops! Une erreur se produit, Code erreur: ' + response.status;
-            throw new Error(message);
+            const error= await response.json();
+            throw error;
         }
         const colors= await response.json();
         return colors;

@@ -2,10 +2,10 @@ import './App.css';
 
 import { Button } from 'react-bootstrap';
 
-import {WishList} from './Backends/Wishlist';
+import {Carts} from './Backends/Carts';
 
 import '../src/ThemeStyle/Bootswatch_bootstrap.min.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
 
@@ -14,7 +14,7 @@ function App() {
   const [mess, setMess] =  useState({});
 
   function handleClick(){
-      const wishlist= new WishList(urlBase);
+      const wishlist= new Carts(urlBase);
       wishlist.clear().then(()=>{
           //setMess('Vidange avec succés !!');
       }).catch(error=>{

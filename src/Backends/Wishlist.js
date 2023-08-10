@@ -22,7 +22,8 @@ export class WishList{
                         headers: {'Content-type': 'application/json; charset=UTF-8'}
                     });
         if (!response.ok) {
-            throw new Error(response);
+            const error= await response.json();
+            throw error;
         }
     }
 
@@ -30,7 +31,8 @@ export class WishList{
         const url= this.urlBase+'wishlist/delete-product/' + id;
         const response= await fetch(url, {method: 'DELETE'});
         if (!response.ok) {
-            throw new Error(response);
+            const error= await response.json();
+            throw error;
         }
     }
 
