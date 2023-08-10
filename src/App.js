@@ -1,15 +1,20 @@
 import './App.css';
 
-import { Button } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from './Components/Communs/Headers';
+import Footer from './Components/Communs/Footers';
 
-import {Carts} from './Backends/Carts';
+import Home from './Pages/Home';
+import Products from './Pages/Products';
 
 import '../src/ThemeStyle/Bootswatch_bootstrap.min.css';
-import { useState } from 'react';
+import Abouts from './Pages/Abouts';
+import WishList from './Pages/WishList';
+
 
 function App() {
 
-  const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
+  /*const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
   const [mess, setMess] =  useState({});
 
@@ -22,12 +27,19 @@ function App() {
           setMess(error);
       });
   }
-
+*/
   return (
-    <div className="App">
-        <Button onClick={handleClick.bind(this)} variant="primary">Primary</Button>
-       <p>{mess.message}</p> 
-    </div>
+      <BrowserRouter>
+          <Header/>
+          <Routes>
+              <Route index element={<Home />} />
+              <Route path="/Products" element={<Products />} />
+              <Route path="/Wishlist" element={<WishList />} />
+              <Route path="/Abouts" element={<Abouts />} />
+              <Route path="*" element={<Home />} />
+          </Routes>
+          <Footer/>
+      </BrowserRouter>
   );
 }
 
