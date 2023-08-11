@@ -32,7 +32,7 @@ const Themes = [
 export default function StyleTheme({Style, onChangeTheme}) {
     return (
         <div className='d-flex justify-content-center align-items-center w-100'>
-            <Form.Label htmlFor="theme" className='my-0 mx-2 text-nowrap text-secondary fw-bold'>Théme Style:</Form.Label>
+            <Form.Label htmlFor="theme" className='my-0 mx-2 text-nowrap text-primary fw-bold'>Théme Style:</Form.Label>
             <Form.Select id='theme' className='w-auto py-0 my-1' onChange={(e)=>{onChangeTheme(e)}} value={Style}>
                 {Themes.map(item => (
                     <option key={item.id} value={item.value} >{item.value.slice(0, item.value.indexOf('_'))}</option>  
@@ -42,10 +42,11 @@ export default function StyleTheme({Style, onChangeTheme}) {
   );
 }
 
-export function ModalStyleTheme({EtatModal, Style, onChangeTheme, onConfirmer, onAnnuler}){
+export function ModalStyleTheme({Etat, Style, onChangeTheme, onConfirmer, onAnnuler}){
+    let Action= 2;
     return (
         <>
-            <Modal show={EtatModal} onHide={onAnnuler} backdrop="static" keyboard={false} centered>
+            <Modal show= {Etat} onHide={onAnnuler} backdrop="static" keyboard={true} centered>
                 <Modal.Header className='bg-primary text-light' closeButton>
                     <Modal.Title ><h4>STYLE THÉME</h4></Modal.Title>
                 </Modal.Header>
@@ -53,8 +54,8 @@ export function ModalStyleTheme({EtatModal, Style, onChangeTheme, onConfirmer, o
                     <StyleTheme Style= {Style} onChangeTheme={onChangeTheme}/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={onAnnuler}>Annuler</Button>
-                    <Button variant='primary' onClick={onConfirmer}>Choisir</Button>
+                    <Button variant="secondary" onClick={()=>{onAnnuler(Action)}}>Annuler</Button>
+                    <Button variant='primary' onClick={()=>{onConfirmer(Action)}}>Choisir</Button>
                 </Modal.Footer>
             </Modal>
         </>
