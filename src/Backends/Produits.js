@@ -1,5 +1,5 @@
 
-export class Produits{
+export default class Produits{
     
     urlBase= '';
 
@@ -17,12 +17,6 @@ export class Produits{
         const products= await response.json();
         return products;
     }
-
-    /*getProducts().then(products=>{
-
-    }).catch(error=>{
-        error.message
-    })*/
 
     async getProduct(id){
         const url= this.urlBase+'products/'+ id;
