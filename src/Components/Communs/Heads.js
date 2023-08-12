@@ -9,9 +9,9 @@ export default function Heads() {
     const navigate= useNavigate();
     return (
         <>
-                <Navbar sticky='top' expand='xl' className='py-0 px-0 my-4'>
-                    <Container fluid className='mx-0 px-0 bg-danger'>
-                        <Navbar.Collapse className='d-flex justify-content-between align-items-center bg-white'>
+                <Navbar sticky='top' expand='lg' className='py-0 px-0 my-sm-4 my-2'>
+                    <Container fluid className='mx-0 px-0'>
+                        <Navbar.Collapse className='d-flex justify-content-center justify-content-sm-between align-items-center bg-white'>
                             <Nav.Link onClick={()=>{navigate('/HOME')}} className='d-lg-flex d-none'>
                                 <Navbar.Brand className='py-0 d-lg-flex d-none align-items-center ms-5'>
                                     <div className='d-flex'>
@@ -28,7 +28,7 @@ export default function Heads() {
                                     <Form.Control type="search" placeholder="Recherche des produits" className="border-primary me-0 rounded-0" aria-label="Recherche"/>
                                     <Button variant="outline-primary" className='rounded-0 ms-0'><BiSearchAlt className='text-black' style={{fontSize:"25px"}} /></Button>
                             </Form>
-                            <div className='me-5 d-flex flex-column align-items-center'>
+                            <div className='me-5 d-sm-flex d-none flex-column align-items-center'>
                                 <p className='my-0 fw-bold'>Service Client</p>
                                 <p className='my-0'>+1 438 226 9031</p>
                             </div>
