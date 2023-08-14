@@ -40,15 +40,15 @@ export default function Categories(){
 
     return(
         <>
-            <div className='mx-5 my-5'>
-                <h2 className='w-100' style={{borderBottom: '1px solid var(--bs-primary)'}}><BiCategoryAlt className="me-2 mb-2 text-dark" style={{fontSize:'40px'}}/>CATÉGORIES</h2>
-                <div className='d-flex justify-content-between flex-wrap flex-column flex-lg-row my-4' style={{width: '100%'}}>
+            <div className='mx-5 my-5 pb-5'>
+                <h2 className='w-100 py-0 ps-2' style={{borderBottomLeftRadius: '20px', borderBottom: '2px solid var(--bs-dark)', borderLeft: '2px solid var(--bs-dark)'}}><BiCategoryAlt className="me-2 mb-2 text-dark" style={{fontSize:'40px'}}/>CATÉGORIES</h2>
+                <div className='d-flex justify-content-between align-items-center flex-wrap flex-column flex-lg-row my-4' style={{width: '100%'}}>
                     {category(prods).map(item=>(
-                        <div key={item.id} className='bouton d-flex align-items-center border-top border-start border-3 border-primary' style={{cursor: 'pointer'}}>
-                            <div><img src={item.image} alt="" style={{height: '100px', objectFit: 'contain'}} /></div>
+                        <div key={item.id} className='bouton d-flex align-items-center border-top border-start border-3 border-primary rounded-4 my-2' style={{cursor: 'pointer'}}>
+                            <div><img src={item.image} alt="" style={{height: '95px', objectFit: 'contain'}} /></div>
                             <div className='btnText d-flex align-items-center flex-column py-4'>
-                                <h5 className='btnTextCat my-0 w-100 text-center'>{item.name}</h5>
-                                <p className='my-0 w-100 text-center'>({item.totalProduit}) Produits</p>
+                                <h5 className='btnTextCat my-0 text-center'>{item.name}</h5>
+                                <p className='btnTextProd my-0 w-100 text-center'>({item.totalProduit}) Produits</p>
                             </div>
                         </div>    
                     ))}

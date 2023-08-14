@@ -1,6 +1,6 @@
 import Slider from '../Components/Communs/Carousel';
 import Infos from '../Components/Home/Infos';
-import Categories from '../Components/Home/Categories';
+import Categories from '../Components/Categories/Categories';
 import RecentsProducts from '../Components/Produits/ProduitsRecents';
 import Foots from '../Components/Communs/Foots';
 
