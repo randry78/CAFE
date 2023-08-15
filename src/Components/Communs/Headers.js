@@ -11,6 +11,7 @@ import { CgToolbarBottom } from "react-icons/cg";
 import Produits from '../../Backends/Produits';
 import { Alerts } from './Alerts';
 import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 
 import './Styles/headers.css';
 
@@ -71,6 +72,7 @@ export default function Header({onMonProfil, onUserDisConnect, onCategorie, onCh
                                 
                                 <Nav.Link onClick={()=>{navigate('/PRODUCTS')}} className='NavLink  mx-3 d-flex justify-content-start text-black align-items-center flex-wrap'><GiCoffeeCup className="mx-2" style={{fontSize:'40px'}}/>PRODUITS</Nav.Link>
                                 <Nav.Link onClick={()=>{navigate('/ABOUTS')}} className='NavLink d-flex justify-content-start align-items-center flex-wrap'><BsFillExclamationCircleFill className="mx-2" style={{fontSize:'40px'}} />A PROPOS</Nav.Link>
+                                <Nav.Link onClick={()=>{navigate('/CAFE')}} className='NavLink  mx-3 d-flex justify-content-start text-black align-items-center flex-wrap'><GiCoffeeCup className="mx-2" style={{fontSize:'40px'}}/>CAFÉ</Nav.Link>
                             </Nav>
                             <Nav className="d-flex justify-content-start">
                                 <Nav.Link className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>3</span></Badge><span className='d-lg-none ms-2'>COUP DE COEUR</span></Nav.Link>
@@ -78,7 +80,7 @@ export default function Header({onMonProfil, onUserDisConnect, onCategorie, onCh
                                 <NavDropdown align='end' title={<span><BiSolidUserCircle style={{fontSize:"40px"}} /><span className="d-lg-none">UTILISATEURS</span></span>} id="navbarScrollingDropdown" className='fw-bold mx-0 my-0'>
                                     <NavDropdown.Item disabled href="#" onClick={onMonProfil} className='d-flex align-items-center'><BiSolidUserRectangle className="me-2" style={{fontSize:'25px'}}/>Mon Profil</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item href="#" onClick={onChangeThemeStyle} className='d-flex align-items-center'><MdStyle className="me-2" style={{fontSize:'25px'}} />Théme Style</NavDropdown.Item>
+                                    <NavDropdown.Item href="#" onClick={onChangeThemeStyle} className='d-flex align-items-center'><MdStyle className="me-2" style={{fontSize:'25px'}} />Thème Style</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item disabled href="#" onClick={onUserDisConnect} className='fw-bold d-flex align-items-center'><IoLogOut className="me-2" style={{fontSize:'25px'}} />DéConnecter</NavDropdown.Item>
                                 </NavDropdown>

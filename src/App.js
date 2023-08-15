@@ -12,7 +12,9 @@ import Products from './Pages/Products';
 import '../src/ThemeStyle/Bootswatch_bootstrap.min.css';
 import Abouts from './Pages/Abouts';
 import WishList from './Pages/WishList';
+import Cafe from "./Pages/Cafe";
 import { useEffect, useState } from 'react';
+
 
 
 function App() {
@@ -60,6 +62,7 @@ function App() {
                     <Route path="/Wishlist" element={<WishList />} />
                     <Route path="/Abouts" element={<Abouts />} />
                     <Route path="*" element={<Home />} />
+                    <Route path="/CAFE" element={<Cafe/>}/>
                 </Routes>
                 <Footer/>
 
