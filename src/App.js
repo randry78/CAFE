@@ -14,6 +14,7 @@ import Abouts from './Pages/Abouts';
 import WishList from './Pages/WishList';
 import Cafe from "./Pages/Cafe";
 import { useEffect, useState } from 'react';
+import ProductDetail from "./Pages/ProductDetail";
 
 
 
@@ -61,6 +62,7 @@ function App() {
                     <Route path="/Products" element={<Products />} />
                     <Route path="/Wishlist" element={<WishList />} />
                     <Route path="/Abouts" element={<Abouts />} />
+                    <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
                 </Routes>

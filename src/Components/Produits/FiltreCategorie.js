@@ -4,12 +4,13 @@ import { BiCategoryAlt } from "react-icons/bi";
 import Produits from '../../Backends/Produits';
 import { Alerts } from '../Communs/Alerts';
 
-export default function FiltreCategorie() {
+export default function FiltreCategorie({onFilter}) {
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
     const [prods, setProds] =  useState([]);
     const [Alert, setAlert]= useState({Etat: false, Titre: '', Type: '', Message: ''});
     const [checkAllCat, setcheckAllCat] =  useState(true);
+    const [filter, setFilter]= useState([]);
 
     useEffect(()=>{
         const produits= new Produits(urlBase);
@@ -39,16 +40,36 @@ export default function FiltreCategorie() {
         setAlert({Etat: false});
     }
 
+    function handleFilter(event, id){
+        const isExist = (element) => element === id;
+        const index= filter.findIndex(isExist);
+        if (index === -1){
+            filter.push(id); 
+        } else {
+            filter.splice(index, 1);
+        }
+        onFilter(filter);
+    }
+
+    function handleAllFilter(event){
+        setcheckAllCat(event.target.checked); 
+        if (event.target.checked){
+            onFilter([]);
+        } else {
+            onFilter(filter);
+        }
+    }
+
     return (
         <>
             <div className='mb-5'>
                 <h4 className='text-nowrap my-0'><BiCategoryAlt className='me-2'/>FILTRAGE PAR CATÉGORIES</h4>
                 <div className='px-3 border d-flex align-items-start'>
                     <Form className='d-flex flex-column w-100'>
-                        <Form.Check className='fw-bold my-3' type='checkbox' id= 'id-categorie' label= 'Toutes les catégories' defaultChecked= {true} onChange={(event)=>{setcheckAllCat(event.target.checked)}}/>
+                        <Form.Check className='fw-bold my-3' type='checkbox' id= 'id-categorie' label= 'Toutes les catégories' defaultChecked= {checkAllCat} onChange={(event)=>{handleAllFilter(event)}}/>
                         {Categorie(prods).map(item=>(    
-                            <div className='d-flex my-1'>
-                                <Form.Check disabled={checkAllCat} type='checkbox' id={`id-${item.id}`} label= {item.name} />
+                            <div key={item.id} className='d-flex my-1'>
+                                <Form.Check disabled={checkAllCat} type='checkbox' id={`id-${item.id}`} label= {item.name} onChange={(event)=>{handleFilter(event, item.id)}}/>
                                 <div className='d-flex justify-content-end w-100'>
                                     <span className='ms-xs-0 ms-5'>({item.totalProduit}) Produits</span>
                                 </div>

@@ -10,7 +10,8 @@ import { useEffect, useState } from 'react';
 
 export default function Products(){
     const [prods, setProds] =  useState([]);
-    const [maxPrice, setmaxPrice] =  useState(0);
+    let [prodsFilter, setProdsFilter] =  useState([]);
+    const [filter, setFilter] = useState({category: [], color: [], price:{min:0, max:0}});
 
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
@@ -26,24 +27,99 @@ export default function Products(){
         });
     }, [prods]);
 
-    
     function onFermerAlert(){
         setAlert({Etat: false});
     }
 
-    function maxPrix(produit){
-        let maxPrix= [];
-        for (const item of produit){
-            if (maxPrix < item.price){
-                maxPrix= item.price;
+    function filterColor(produit1, colors=[]){
+        let produits2= [];
+
+        if (colors.length > 0){
+            for (const item of produit1){
+                const isExist = (element) => element === item.color.id;
+                const index= colors.findIndex(isExist);
+                if (index !== -1){
+                    produits2.push(item);
+                }
             }
-        }
-        return maxPrix;
+        } else produits2= produit1.slice(0);
+        return produits2;
     }
 
-    function handleListProduit(p){
-        setProds(p);
-        setmaxPrice(maxPrix(prods));
+    function filterPrice(produit1, price={min:0, max:0}){
+        let produits2= [];
+
+        if (price.min > 0 || price.max > 0){
+            for (const item of produit1){
+                if (price.min < item.price && item.price < price.max){
+                    produits2.push(item);
+                }
+            }
+        } else produits2= produit1.slice(0);
+
+        return produits2;
+    }
+
+    function filterCategory(produit1, category=[]){
+        let produits2= [];
+
+        if (category.length > 0){
+            for (const item of produit1){
+                const isExist = (element) => element === item.category.id;
+                const index= category.findIndex(isExist);
+                if (index !== -1){
+                    produits2.push(item);
+                }
+            }
+        } else produits2= produit1.slice(0);
+        return produits2;
+    }
+
+
+    function handleFilterCategory(filtre){
+        filter.category= filtre;
+        setFilter(filter);
+        
+        prodsFilter= prods.slice(0);
+        setProdsFilter(prodsFilter);
+
+        let p= filterCategory(prodsFilter.slice(0), filter.category);
+        p= filterPrice(p.slice(0), filter.price);
+        p= filterColor(p.slice(0), filter.color);
+
+        prodsFilter= p.slice(0);
+        setProdsFilter(p.slice(0));
+    }
+
+    function handleFilterPrice(filtre){
+        filter.price.min= filtre.min;
+        filter.price.max= filtre.max;
+        setFilter(filter);
+
+        prodsFilter= prods.slice(0);
+        setProdsFilter(prodsFilter);
+
+        let p= filterCategory(prodsFilter.slice(0), filter.category);
+        p= filterPrice(p.slice(0), filter.price);
+        p= filterColor(p.slice(0), filter.color);
+
+        prodsFilter= p.slice(0);
+        setProdsFilter(p.slice(0));
+    }
+
+    function handleFilterColor(filtre){
+        filter.color= filtre;
+        setFilter(filter);
+
+        prodsFilter= prods.slice(0);
+        setProdsFilter(prodsFilter);
+
+        let p= filterCategory(prodsFilter.slice(0), filter.category);
+        p= filterPrice(p.slice(0), filter.price);
+        p= filterColor(p.slice(0), filter.color);
+
+        prodsFilter= p.slice(0);
+        setProdsFilter(p.slice(0));
     }
 
     return(
@@ -53,12 +129,12 @@ export default function Products(){
                     <Navigation />
                     <div className="row mx-4">
                         <div className="col-lg-3 mx-0 px-0">
-                            <FiltreCategorie />
-                            <FiltrePrix maxPrix= {maxPrice} />
-                            <FiltreCouleur />
+                            <FiltreCategorie onFilter={handleFilterCategory}/>
+                            <FiltrePrix onFilter={handleFilterPrice} />
+                            <FiltreCouleur onFilter={handleFilterColor} />
                         </div>
                         <div className="col-lg-9 mx-0 px-0">
-                            <ListProduits lists= {prods} />
+                            <ListProduits lists= {prodsFilter} />
                             <PageNavigation />
                         </div>
                     </div>
