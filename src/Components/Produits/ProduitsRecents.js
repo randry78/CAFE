@@ -8,8 +8,11 @@ import { GiHeartPlus } from "react-icons/gi";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { Alerts } from '../Communs/Alerts';
 import './Styles/produits.css';
+import { useNavigate } from "react-router-dom";
 
 export default function RecentsProducts(){
+    const navigate= useNavigate();
+
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
     const [prods, setProds] =  useState([]);
@@ -29,6 +32,7 @@ export default function RecentsProducts(){
     function onFermerAlert(){
         setAlert({Etat: false});
     }
+
     return(
         <>
                     <div className='mx-5 my-5 pb-4'>
@@ -36,7 +40,7 @@ export default function RecentsProducts(){
                         <div className='d-flex flex-row flex-wrap justify-content-evenly'>
                             {prods.map(item=>(
                                 
-                                <Card key={item.id} className='mx-3 my-3 border-0 border-top border-start border-primary border-3 fiche rounded-4' style={{ cursor: 'pointer', width: '16rem', height: '20rem', maxHeight: '20rem',
+                                <Card onClick={()=>{navigate('/ProductDetail/'+item.id)}} key={item.id} className='mx-3 my-3 border-0 border-top border-start border-primary border-3 fiche rounded-4' style={{ cursor: 'pointer', width: '16rem', height: '20rem', maxHeight: '20rem',
                                                                                                                                     boxShadow: '15px 10px 15px 0px rgba(0,0,0,0.2)' }}>
                                     <Card.Img className='d-flex align-items-start mt-2' variant="top" src= {item.image} style={{width: '100%', height: '40%', objectFit: 'contain'}} />
                                     <Card.Body className='d-flex flex-column justify-content-between px-2 py-2'>
