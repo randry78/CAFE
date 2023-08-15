@@ -1,39 +1,16 @@
 import {Button, Card, Badge} from 'react-bootstrap';
-import Produits from '../../Backends/Produits';
-import { useEffect, useState } from 'react';
 import { BsCartPlus } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { GiHeartPlus } from "react-icons/gi";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { Alerts } from '../Communs/Alerts';
 import './Styles/produits.css';
 
-export default function ListProducts({onListProduit}){
-    const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
-
-    const [prods, setProds] =  useState([]);
-    const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
-
-    useEffect(()=>{
-        const produits= new Produits(urlBase);
-        produits.getProducts().then(p=>{
-            setProds(p);
-            onListProduit(prods);
-        }).catch(error=>{
-            setAlert({Etat: true, Titre: 'Error list all products', Type: 'ERROR', Message: error.message});
-            console.log(error);
-        });
-    }, [onListProduit, prods]);
-
+export default function ListProduits({lists}){
     
-
-    function onFermerAlert(){
-        setAlert({Etat: false});
-    }
     return(
         <>
             <div className='d-flex flex-row flex-wrap justify-content-evenly'>
-                {prods.map(item=>(
+                {lists.map(item=>(
                     <Card key={item.id} className='mx-2 my-3 border-0 border-top border-start border-primary border-3 fiche rounded-4' style={{ cursor: 'pointer', width: '16rem', height: '20rem', maxHeight: '20rem',
                                                                                                                                 boxShadow: '15px 10px 15px 0px rgba(0,0,0,0.2)' }}>
                         <Card.Img className='d-flex align-items-start mt-2' variant="top" src= {item.image} style={{width: '100%', height: '40%', objectFit: 'contain'}} />
@@ -64,7 +41,7 @@ export default function ListProducts({onListProduit}){
                     </Card>
                 ))}   
             </div>
-            <Alerts Etat={Alert.Etat} Type={Alert.Type} Titre={Alert.Titre}  Message={Alert.Message} onFermer= {onFermerAlert}/>
+            
         </>
     )
 }
