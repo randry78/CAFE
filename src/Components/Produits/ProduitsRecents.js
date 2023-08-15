@@ -31,7 +31,7 @@ export default function RecentsProducts(){
     }
     return(
         <>
-                    <div className='mx-5 my-5 pb-5'>
+                    <div className='mx-5 my-5 pb-4'>
                         <h2 className='w-100 ps-2 text-primary' style={{borderBottomLeftRadius: '20px', borderBottom: '2px solid var(--bs-primary)', borderLeft: '2px solid var(--bs-primary)'}}><GiCoffeeCup className="me-2 mb-2 text-dark" style={{fontSize:'40px'}}/>PRODUITS RECENTS</h2> 
                         <div className='d-flex flex-row flex-wrap justify-content-evenly'>
                             {prods.map(item=>(

@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   
-    const [ThemeStyle, setThemeStyle]= useState('Journal_bootstrap.min.css');
+    const [ThemeStyle, setThemeStyle]= useState('Cerulean_bootstrap.min.css');
     const [ModalStyle, setModalStyle]= useState({Etat: false, Theme:''});
     const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
 
