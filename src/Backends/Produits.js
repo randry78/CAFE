@@ -18,6 +18,46 @@ export default class Produits{
         return products;
     }
 
+    filterProduct(products, category=[], price={minPrice:0, maxPrice:0}, color= []){
+        let produits1= products;
+        let produits2= [];
+
+        if (category.length > 0){
+            for (const item of produits1){
+                const isExist = (element) => element.id === item.category.id;
+                const index= category.findIndex(isExist);
+                if (index !== -1){
+                    produits2.push(item);
+                }
+            }
+            produits1= produits2.slice(0);
+            produits2= [];
+        }
+
+        if (price.minPrice > 0 && price.maxPrice > 0){
+            for (const item of produits1){
+                if (price.min < item.price && item.price < price.maxPrice){
+                    produits2.push(item);
+                }
+            }
+            produits1= produits2.slice(0);
+            produits2= [];
+        }
+
+        if (color.length > 0){
+            for (const item of produits1){
+                const isExist = (element) => element.id === item.color.id;
+                const index= category.findIndex(isExist);
+                if (index !== -1){
+                    produits2.push(item);
+                }
+            }
+            produits1= produits2.slice(0);
+            produits2= [];
+        }
+        return produits1;
+    }
+
     async getProduct(id){
         const url= this.urlBase+'products/'+ id;
         const response= await fetch(url, {method:'GET'});

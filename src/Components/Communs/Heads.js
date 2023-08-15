@@ -9,9 +9,9 @@ export default function Heads() {
     const navigate= useNavigate();
     return (
         <>
-                <Navbar sticky='top' expand='lg' className='py-0 px-0 my-sm-4 my-2'>
+                <Navbar sticky='top' variant= 'dark' expand='lg' className='py-0 px-0 my-sm-4 my-2'>
                     <Container fluid className='mx-0 px-0'>
-                        <Navbar.Collapse className='d-flex justify-content-center justify-content-sm-between align-items-center bg-white'>
+                        <Navbar.Collapse className='d-flex justify-content-center justify-content-sm-between align-items-center'>
                             <Nav.Link onClick={()=>{navigate('/HOME')}} className='d-lg-flex d-none'>
                                 <Navbar.Brand className='py-0 d-lg-flex d-none align-items-center ms-5'>
                                     <div className='d-flex'>
