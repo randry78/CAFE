@@ -6,7 +6,7 @@ import DetailDescription from './DetailDescription';
 import { Badge} from 'react-bootstrap';
 import { GiHearts } from "react-icons/gi";
 
-export default function Detail({id}){
+export default function Detail({id, onPanier}){
 
     const [prod, setProd] =  useState();
 
