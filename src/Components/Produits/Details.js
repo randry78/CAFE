@@ -1,10 +1,13 @@
 import { Alerts } from '../../Components/Communs/Alerts';
 import { useEffect, useState } from 'react';
 import Produits from '../../Backends/Produits';
+import WishList from '../../Backends/Wishlist';
 import FormAddPanier from './FormAddPanier';
 import DetailDescription from './DetailDescription';
+import { Button } from 'react-bootstrap';
+import { GiHearts } from "react-icons/gi";
 
-export default function Detail({id, onPanier}){
+export default function Detail({id, onPanier, onWishList}){
 
     const [prod, setProd] =  useState();
 
@@ -26,6 +29,21 @@ export default function Detail({id, onPanier}){
         setAlert({Etat: false});
     }
 
+    function handleWishlist(article){
+        const wishlist= new WishList(urlBase);
+        wishlist.add(id).then(()=>{
+            setAlert({Etat: true, Titre: 'WISHLIST - Ajout liste a souhait', Type: 'SUCCESS', Message: 'Ajout de produit dans la liste a souhait avec succés !  Produit: '+article.name}); 
+            wishlist.getAll().then((p)=>{
+                onWishList(p.length);
+            }).catch(error=>{
+                setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
+            });
+        }).catch(error=>{
+            setAlert({Etat: true, Titre: 'ADD WISHLIST - Error add wishlist', Type: 'ERROR', Message: error.message});
+            console.log(error);
+        });
+    }
+
     return (
         <>
             <div style={{height: '100%'}} className='mx-4'>
@@ -39,7 +57,10 @@ export default function Detail({id, onPanier}){
                         <p className='my-4'>{prod?prod.description:''}</p>
                         <p><span className='fw-bold'>Catégorie: </span><span>{prod?prod.category.name:''}</span></p>
                         <p><span className='fw-bold'>Couleur: </span><span style={{color: prod?prod.color.hexCode:''}}>{prod?prod.color.name:''}</span> <span className='px-2 ms-2' style={{border: '1px solid', color: prod?prod.color.hexCode:'', backgroundColor: prod?prod.color.hexCode:''}}>C</span></p>
-                        <FormAddPanier id={id} name={prod?prod.name:''} onPanier={onPanier}/>                    
+                        <FormAddPanier id={id} name={prod?prod.name:''} onPanier={onPanier}/>   
+                        <div>
+                            <Button onClick={()=>{handleWishlist(prod)}}><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} />Enregistrer au liste</Button>
+                        </div>                 
                   </div>
                 </div>
                 <DetailDescription />
