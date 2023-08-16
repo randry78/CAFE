@@ -38,6 +38,13 @@ function App() {
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
         });
+
+        const wishlist= new WishList(urlBase);
+        wishlist.getAll().then((p)=>{
+            setWishlist(p.length);
+        }).catch(error=>{
+            setAlert({Etat: true, Titre: 'WISHLIST - Error list wishlist', Type: 'ERROR', Message: error.message});
+        });
     }, [ThemeStyle]);
 
 

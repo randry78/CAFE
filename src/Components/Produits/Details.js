@@ -36,7 +36,7 @@ export default function Detail({id, onPanier, onWishList}){
             wishlist.getAll().then((p)=>{
                 onWishList(p.length);
             }).catch(error=>{
-                setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
+                setAlert({Etat: true, Titre: 'WISHLIST - Error list wishlist', Type: 'ERROR', Message: error.message});
             });
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'ADD WISHLIST - Error add wishlist', Type: 'ERROR', Message: error.message});
