@@ -60,6 +60,7 @@ function App() {
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
+                    <Route path="/Products/:CategoryId" element={<Products />} />
                     <Route path="/Wishlist" element={<WishList />} />
                     <Route path="/Abouts" element={<Abouts />} />
                     <Route path="/ProductDetail/:id" element={<ProductDetail />} />

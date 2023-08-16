@@ -4,7 +4,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import Produits from '../../Backends/Produits';
 import { Alerts } from '../Communs/Alerts';
 
-export default function FiltreCategorie({onFilter}) {
+export default function FiltreCategorie({filterManual, onFilter}) {
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
     const [prods, setProds] =  useState([]);
@@ -63,10 +63,10 @@ export default function FiltreCategorie({onFilter}) {
     return (
         <>
             <div className='mb-5'>
-                <h4 className='text-nowrap my-0'><BiCategoryAlt className='me-2'/>FILTRAGE PAR CATÉGORIES</h4>
+                <h4 className='text-nowrap my-0'><BiCategoryAlt className='me-2'/>FILTRAGE PAR CATÉGORIES - {filterManual}</h4>
                 <div className='px-3 border d-flex align-items-start'>
                     <Form className='d-flex flex-column w-100'>
-                        <Form.Check className='fw-bold my-3' type='checkbox' id= 'id-categorie' label= 'Toutes les catégories' defaultChecked= {checkAllCat} onChange={(event)=>{handleAllFilter(event)}}/>
+                        <Form.Check className='fw-bold my-3' type='checkbox' defaultChecked={checkAllCat} id= 'id-categorie' label= 'Toutes les catégories'  onChange={(event)=>{handleAllFilter(event)}}/>
                         {Categorie(prods).map(item=>(    
                             <div key={item.id} className='d-flex my-1'>
                                 <Form.Check disabled={checkAllCat} type='checkbox' id={`id-${item.id}`} label= {item.name} onChange={(event)=>{handleFilter(event, item.id)}}/>

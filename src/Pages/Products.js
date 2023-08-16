@@ -7,11 +7,14 @@ import FiltreCategorie from "../Components/Produits/FiltreCategorie";
 import Produits from '../Backends/Produits';
 import { Alerts } from '../Components/Communs/Alerts';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 export default function Products(){
-    const [prods, setProds] =  useState([]);
+    let [prods, setProds] =  useState([]);
     let [prodsFilter, setProdsFilter] =  useState([]);
     const [filter, setFilter] = useState({category: [], color: [], price:{min:0, max:0}});
+    const [naviger, setNaviger] = useState(['accueil', 'produits']);
+    const {CategoryId} = useParams();
 
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
@@ -20,12 +23,24 @@ export default function Products(){
     useEffect(()=>{
         const produits= new Produits(urlBase);
         produits.getProducts().then(p=>{
-            setProds(p);
+            prods= p.slice(0);
+            setProds(prods);
+            
+            if (CategoryId > 0){
+                let cf= [parseInt(CategoryId, 10)];
+                handleFilterCategory(cf);
+            } else {
+                handleFilterCategory([]);
+            }
+
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'PRODUITS - Error list all products', Type: 'ERROR', Message: error.message});
             console.log(error);
         });
-    }, [prods]);
+        
+        
+    }, [CategoryId]);
+
 
     function onFermerAlert(){
         setAlert({Etat: false});
@@ -87,6 +102,20 @@ export default function Products(){
         p= filterPrice(p.slice(0), filter.price);
         p= filterColor(p.slice(0), filter.color);
 
+        const isExist = (element) => element === 'categories';
+        const index= naviger.findIndex(isExist);
+        if (index !== -1){
+            if (filtre.length === 0){        
+                naviger.slice(index, 1);
+                setNaviger(naviger);
+            }
+        } else {
+            if (filtre.length > 0){
+                naviger.push('categories');
+                setNaviger(naviger);
+            }    
+        }
+
         prodsFilter= p.slice(0);
         setProdsFilter(p.slice(0));
     }
@@ -103,6 +132,20 @@ export default function Products(){
         p= filterPrice(p.slice(0), filter.price);
         p= filterColor(p.slice(0), filter.color);
 
+        const isExist = (element) => element === 'prix';
+        const index= naviger.findIndex(isExist);
+        if (index !== -1){
+            if (filtre.min === 0 && filtre.max === 0){        
+                naviger.slice(index, 1);
+                setNaviger(naviger);
+            }
+        } else {
+            if (filtre.min > 0 || filtre.max > 0){
+                naviger.push('prix');
+                setNaviger(naviger);
+            }    
+        }
+
         prodsFilter= p.slice(0);
         setProdsFilter(p.slice(0));
     }
@@ -118,6 +161,20 @@ export default function Products(){
         p= filterPrice(p.slice(0), filter.price);
         p= filterColor(p.slice(0), filter.color);
 
+        const isExist = (element) => element === 'couleurs';
+        const index= naviger.findIndex(isExist);
+        if (index !== -1){
+            if (filtre.length === 0){        
+                naviger.slice(index, 1);
+                setNaviger(naviger);
+            }
+        } else {
+            if (filtre.length > 0){
+                naviger.push('couleurs');
+                setNaviger(naviger);
+            }    
+        }
+
         prodsFilter= p.slice(0);
         setProdsFilter(p.slice(0));
     }
@@ -126,7 +183,7 @@ export default function Products(){
         <>
             <div style={{height: '100%'}}>
                 <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
-                    <Navigation />
+                    <Navigation nav={naviger} />
                     <div className="row mx-4">
                         <div className="col-lg-3 mx-0 px-0">
                             <FiltreCategorie onFilter={handleFilterCategory}/>

@@ -7,7 +7,7 @@ import Detail from "../Components/Produits/Details";
 export default function ProductDetail(){
     const {id} = useParams();
 
-    const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
+    const [Alert, setAlert]= useState({Etat: false, Titre: '', Type: '', Message: ''});
 
     function onFermerAlert(){
         setAlert({Etat: false});
@@ -17,7 +17,7 @@ export default function ProductDetail(){
         <>
             <div style={{height: '100%'}}>
                 <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
-                    <Navigation />
+                    <Navigation nav={['accueil', 'produits', 'detail']}/>
                     <Detail id= {id}/>
                 </div>
             </div>
