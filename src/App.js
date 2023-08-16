@@ -16,6 +16,7 @@ import Cafe from "./Pages/Cafe";
 import Ajout from "./Pages/Ajout";
 import { useEffect, useState } from 'react';
 import ProductDetail from "./Pages/ProductDetail";
+import Paniers from "./Pages/Paniers";
 
 
 
@@ -61,7 +62,9 @@ function App() {
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
+                    <Route path="/Products/:CategoryId" element={<Products />} />
                     <Route path="/Wishlist" element={<WishList />} />
+                    <Route path="/Carts" element={<Paniers />} />
                     <Route path="/Abouts" element={<Abouts />} />
                     <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                     <Route path="*" element={<Home />} />

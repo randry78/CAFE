@@ -11,7 +11,6 @@ import { CgToolbarBottom } from "react-icons/cg";
 import Produits from '../../Backends/Produits';
 import { Alerts } from './Alerts';
 import { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
 
 import './Styles/headers.css';
 
@@ -66,7 +65,7 @@ export default function Header({onMonProfil, onUserDisConnect, onCategorie, onCh
                             <Nav className="me-auto border-0">
                                 <NavDropdown align='start' title={<span><BiCategoryAlt className="mx-2" style={{fontSize:'40px'}}/><span>CATÉGORIES</span></span>} className='bg-black mx-lg-5 px-lg-5'>
                                     {categories.map(item=>(
-                                        <NavDropdown.Item key={item} data-toggle-second="tooltip" title= {item.description} data-placement="right" aria-haspopup="true" aria-expanded="false" onClick={onCategorie} className='d-flex align-items-center w-100'>{iconCategory(item.name)} {item.name}</NavDropdown.Item>                                        
+                                        <NavDropdown.Item onClick={()=>{navigate('/Products/'+item.id)}} key={item.id} data-toggle-second="tooltip" title= {item.description} data-placement="right" aria-haspopup="true" aria-expanded="false"  className='d-flex align-items-center w-100'>{iconCategory(item.name)} {item.name}</NavDropdown.Item>                                        
                                     ))}
                                 </NavDropdown>
                                 
@@ -81,7 +80,7 @@ export default function Header({onMonProfil, onUserDisConnect, onCategorie, onCh
                             </Nav>
                             <Nav className="d-flex justify-content-start">
                                 <Nav.Link className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>3</span></Badge><span className='d-lg-none ms-2'>COUP DE COEUR</span></Nav.Link>
-                                <Nav.Link className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><BsCart4 className="mx-1 text-ligth" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>5</span></Badge><span className='d-lg-none ms-2'>PANIER</span></Nav.Link>
+                                <Nav.Link onClick={()=>{navigate('/Carts/')}} className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><BsCart4 className="mx-1 text-ligth" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>5</span></Badge><span className='d-lg-none ms-2'>PANIER</span></Nav.Link>
                                 <NavDropdown align='end' title={<span><BiSolidUserCircle style={{fontSize:"40px"}} /><span className="d-lg-none">UTILISATEURS</span></span>} id="navbarScrollingDropdown" className='fw-bold mx-0 my-0'>
                                     <NavDropdown.Item disabled href="#" onClick={onMonProfil} className='d-flex align-items-center'><BiSolidUserRectangle className="me-2" style={{fontSize:'25px'}}/>Mon Profil</NavDropdown.Item>
                                     <NavDropdown.Divider />

@@ -30,7 +30,7 @@ export default function Heads() {
                             </Form>
                             <div className='me-5 d-sm-flex d-none flex-column align-items-center'>
                                 <p className='my-0 fw-bold'>Service Client</p>
-                                <p className='my-0'>+1 438 226 9031</p>
+                                <h4 className='my-0'>+1 438 226 9031</h4>
                             </div>
                         </Navbar.Collapse>
                     </Container>
