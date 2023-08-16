@@ -23,16 +23,7 @@ export default function Products(props){
     useEffect(()=>{
         const produits= new Produits(urlBase);
         
-        if (Search !== undefined){
-            produits.searchProducts(Search).then(p=>{
-                prods= p.slice(0);
-                setProds(prods.slice(0)); 
-                handleFilterCategory([]);   
-            }).catch(error=>{
-                setAlert({Etat: true, Titre: 'PRODUITS - Error search products', Type: 'ERROR', Message: error.message});
-                console.log(error);
-            });
-        } else {
+        if (Search === undefined || Search === 'null'){
             produits.getProducts().then(p=>{
                 prods= p.slice(0);
                 setProds(prods);
@@ -48,6 +39,15 @@ export default function Products(props){
                 setAlert({Etat: true, Titre: 'PRODUITS - Error list all products', Type: 'ERROR', Message: error.message});
                 console.log(error);
             });
+        } else {
+            produits.searchProducts(Search).then(p=>{
+                prods= p.slice(0);
+                setProds(prods.slice(0)); 
+                handleFilterCategory([]);   
+            }).catch(error=>{
+                setAlert({Etat: true, Titre: 'PRODUITS - Error search products', Type: 'ERROR', Message: error.message});
+                console.log(error);
+            });            
         }
     }, [CategoryId, Search]);
 
