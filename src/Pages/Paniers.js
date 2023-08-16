@@ -27,38 +27,40 @@ export default function Paniers(){
 
     return(
         <>
-            <div style={{height: '90vh'}}>
-            <div className="d-flex justify-content-evenly" style={{overflowY: 'scroll'}}>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th className="text-center" style={{width: '50%'}}><h4>Item</h4></th>
-                            <th className="text-center " style={{width: '16%'}}><h4>Prix</h4></th>
-                            <th className="text-center" style={{width: '16%'}}><h4>Quantité</h4></th>
-                            <th className="text-center" style={{width: '16%'}}><h4>Total</h4></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {carts.map(item=>(
-                            <tr key={item.id}>
-                                <td className="d-flex">
-                                    <img src={item.image} alt="" style={{height: '5rem', width: '10rem'}}/>
-                                    <div className="d-flex flex-column">
-                                        <h5>{item.name}</h5>
-                                        <span className='description' style={{display: '-webkit-box', width: '100%', height: '25px', overflow:' hidden'}}>
-                                            {item.description}
-                                        </span>
-                                        <span>Couleur: {item.color.name}</span>
-                                    </div>
-                                </td>
-                                <td className="text-center">{item.price}</td>
-                                <td className="text-center">{item.quantity}</td>
-                                <td className="text-center">{item.price * item.quantity}</td>
+            <div style={{height: '100%'}}>
+                <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th className="text-center" style={{width: '50%'}}><h4>Item</h4></th>
+                                <th className="text-center " style={{width: '16%'}}><h4>Prix</h4></th>
+                                <th className="text-center" style={{width: '16%'}}><h4>Quantité</h4></th>
+                                <th className="text-center" style={{width: '16%'}}><h4>Total</h4></th>
                             </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            </div>
+                        </thead>
+                        <tbody>
+                            {carts.map(item=>(
+                                <tr key={item.id}>
+                                    <td className="d-flex">
+                                        <div style={{height: '5rem', width: '10rem'}}>
+                                            <img src={item.image} alt="" style={{height: '5rem', width: '10rem', objectFit: 'contain'}}/>
+                                        </div>
+                                        <div className="d-flex flex-column">
+                                            <h5>{item.name}</h5>
+                                            <span className='description' style={{display: '-webkit-box', width: '100%', height: '25px', overflow:' hidden'}}>
+                                                {item.description}
+                                            </span>
+                                            <span>Couleur: {item.color.name}</span>
+                                        </div>
+                                    </td>
+                                    <td className="text-center">{item.price}</td>
+                                    <td className="text-center">{item.quantity}</td>
+                                    <td className="text-center">{item.price * item.quantity}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
             <Alerts Etat={Alert.Etat} Type={Alert.Type} Titre={Alert.Titre}  Message={Alert.Message} onFermer= {onFermerAlert}/>
         </>
