@@ -28,6 +28,7 @@ export default function ListProduits({lists}){
                                 <div className='d-flex justify-content-center'>
                                     <span className='fw-bold'>{item.category.name}</span>
                                 </div>
+                                
                                 <div className='d-flex justify-content-center'>
                                     <span style={{color: item.color.hexCode}}>{item.color.name}</span>
                                     <span className='px-2 ms-2' style={{border: '1px solid', color: item.color.hexCode, backgroundColor: item.color.hexCode,}}>C</span>
