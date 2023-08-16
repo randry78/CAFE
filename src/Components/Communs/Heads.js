@@ -3,10 +3,37 @@ import {Container, Nav, Navbar, Form, Button} from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import { GiCoffeeBeans } from "react-icons/gi";
 import { BiSearchAlt } from "react-icons/bi";
+import { useState } from 'react';
 
 
 export default function Heads() {
     const navigate= useNavigate();
+    const [etatButton, setEtatButton] = useState(false);
+
+    let [search, setSearch]= useState('');
+
+    function handleClickSearch(){
+        navigate('/Products/0/'+search);
+        search= '';
+        setSearch(search);
+    }
+
+    function handleChangeSearch(event){
+        setSearch(event.target.value);
+        if (event.target.value !== ''){
+            setEtatButton(false);
+        } else {
+            setEtatButton(true);
+        }
+    }
+
+    function handleKeyUp(event){
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            handleClickSearch();
+        }
+    }
+
     return (
         <>
                 <Navbar sticky='top' variant= 'dark' expand='lg' className='py-0 px-0 my-sm-4 my-2'>
@@ -25,8 +52,8 @@ export default function Heads() {
                                 </Navbar.Brand>
                             </Nav.Link>
                             <Form className="d-flex ms-5 ms-lg-0">
-                                    <Form.Control type="search" placeholder="Recherche des produits" className="border-primary me-0 rounded-0" aria-label="Recherche"/>
-                                    <Button variant="outline-primary" className='rounded-0 ms-0'><BiSearchAlt className='text-black' style={{fontSize:"25px"}} /></Button>
+                                <Form.Control onChange={(event)=>handleChangeSearch(event)} onKeyUp={(event)=>handleKeyUp(event)} value={search} type="search" placeholder="Recherche des produits" className="border-primary me-0 rounded-0" aria-label="Recherche"/>
+                                <Button disabled= {etatButton?true:false} onClick={()=>handleClickSearch()} variant="outline-primary" className='rounded-0 ms-0'><BiSearchAlt className='text-black' style={{fontSize:"25px"}} /></Button>
                             </Form>
                             <div className='me-5 d-sm-flex d-none flex-column align-items-center'>
                                 <p className='my-0 fw-bold'>Service Client</p>

@@ -75,7 +75,7 @@ function App() {
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
-                    <Route path="/Products/:CategoryId" element={<Products />} />
+                    <Route path="/Products/:CategoryId/:Search" element={<Products />} />
                     <Route path="/Wishlist" element={<WishList />} />
                     <Route path="/Carts" element={<Paniers onPanier= {handlePanier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />

@@ -3,7 +3,8 @@ import { Carts } from "../Backends/Carts";
 import { Alerts } from '../Components/Communs/Alerts';
 import {Table, Button, Form, Badge} from 'react-bootstrap';
 import './Styles/paniers.css';
-import { MdCancel, MdShoppingCartCheckout } from "react-icons/md";
+import { MdCancel, MdShoppingCartCheckout, MdRemoveShoppingCart } from "react-icons/md";
+import { BsCartXFill } from "react-icons/bs";
 import { useRef } from "react";
 import { ModalConfirmation } from "../Components/Communs/DlgConfirmation";
 
@@ -97,27 +98,52 @@ export default function Paniers({onPanier}){
         }
     }
 
-    function handleDelete(item, index){
+    function handleDelete(item){
         setModal({Action: 1, Etat: true, Type: 'ERROR', Titre: 'PANIER - SUPPRESSION ARTICLES...', 
         Message: 'Vous voulez vraiment supprimer cet article "'+item.name+'" ?', TxtBtnConfirmer:'Supprimer', TxtBtnAnnuler: 'Annuler', Data: item});
+    }
+
+    function handleClear(){
+        setModal({Action: 2, Etat: true, Type: 'ERROR', Titre: 'PANIER - VIDER PANIER...', 
+        Message: 'Vous voulez vraiment vider votre panier ?', TxtBtnConfirmer:'Vider', TxtBtnAnnuler: 'Annuler'});
     }
 
     function handleModalConfirmer(Action){
         const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
         const paniers= new Carts(urlBase);
-        paniers.delete(Modal.Data.id).then(()=>{
-            setAlert({Etat: true, Titre: 'PANIER - Suppression panier', Type: 'SUCCESS', Message: 'Suppression de l\'article "'+Modal.Data.name+'" dans le panier avec succés !'});
-            paniers.getAll().then((p)=>{
-                onPanier(p.length);
-                carts= p.splice(0);
-                setCarts(carts);
-                calculTotal();
-            }).catch(error=>{
-                setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
-            });
-        }).catch(error=>{
-            setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
-        });
+        switch(Action){
+            case 1: // suppression article
+                paniers.delete(Modal.Data.id).then(()=>{
+                    setAlert({Etat: true, Titre: 'PANIER - Suppression panier', Type: 'SUCCESS', Message: 'Suppression de l\'article "'+Modal.Data.name+'" dans le panier avec succés !'});
+                    paniers.getAll().then((p)=>{
+                        onPanier(p.length);
+                        carts= p.splice(0);
+                        setCarts(carts);
+                        calculTotal();
+                    }).catch(error=>{
+                        setAlert({Etat: true, Titre: 'PANIER - Error Total item on cart', Type: 'ERROR', Message: error.message});
+                    });
+                }).catch(error=>{
+                    setAlert({Etat: true, Titre: 'PANIER - Error delete item', Type: 'ERROR', Message: error.message});
+                });
+                break;
+            case 2: // vidage du panier
+                paniers.clear().then(()=>{
+                    setAlert({Etat: true, Titre: 'PANIER - Vidange du panier', Type: 'SUCCESS', Message: 'Le panier a été vidé avec succés !'});
+                    paniers.getAll().then((p)=>{
+                        onPanier(p.length);
+                        carts= p.splice(0);
+                        setCarts(carts);
+                        calculTotal();
+                    }).catch(error=>{
+                        setAlert({Etat: true, Titre: 'PANIER - Error Total item on cart', Type: 'ERROR', Message: error.message});
+                    });
+                }).catch(error=>{
+                    setAlert({Etat: true, Titre: 'PANIER - Error clear item', Type: 'ERROR', Message: error.message});
+                });
+                break;
+            default:
+        }
         setModal({Action: 0, Etat: false});
     }
 
@@ -131,8 +157,9 @@ export default function Paniers({onPanier}){
                 <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
                     <div className="d-flex justify-content-between">
                         <h3 className="text-center w-100 my-4">Votre Panier (<span className="text-dark">{carts.length} articles</span>)</h3>
-                        <h3 className="text-center my-4 text-nowrap mx-5"><Badge>TOTAL : <span className="text-dark fw-bold">{new Intl.NumberFormat().format(subTotal)} $</span></Badge></h3>                   
-                        <Button variant="dark" className="text-nowrap my-4 mx-5">PASSER A LA CAISSE<MdShoppingCartCheckout className="ms-2" style={{fontSize:"25px"}} /></Button>
+                        <h3 className="text-center my-4 text-nowrap mx-2"><Badge>TOTAL : <span className="text-dark fw-bold">{new Intl.NumberFormat().format(grandTotal)} $</span></Badge></h3>                   
+                        <Button disabled={carts.length===0?true:false} onClick={()=>handleClear()} variant="danger" className="text-nowrap my-4 mx-2">Vider le panier<MdRemoveShoppingCart className="ms-2" style={{fontSize:"25px"}} /></Button>
+                        <Button disabled={carts.length===0?true:false} variant="dark" className="text-nowrap my-4 mx-2">Passer à la caisse<MdShoppingCartCheckout className="ms-2" style={{fontSize:"25px"}} /></Button>
                     </div>
                     
                     <Table hover responsive>
@@ -175,7 +202,7 @@ export default function Paniers({onPanier}){
                                         </div>
                                     </td>
                                     <td className="text-center align-middle fs-6 fw-bold">{new Intl.NumberFormat().format(item.price * item.quantity)} $</td>
-                                    <td className="text-center align-middle"><Button variant="danger" onClick={(event)=>handleDelete(item, index)}><MdCancel style={{fontSize:"25px"}} /></Button></td>
+                                    <td className="text-center align-middle"><Button variant="danger" onClick={(event)=>handleDelete(item)}><BsCartXFill style={{fontSize:"25px"}} /></Button></td>
                                 </tr>
                             ))}
                         </tbody>

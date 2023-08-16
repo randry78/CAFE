@@ -9,12 +9,12 @@ import { Alerts } from '../Components/Communs/Alerts';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
-export default function Products(){
+export default function Products(props){
     let [prods, setProds] =  useState([]);
     let [prodsFilter, setProdsFilter] =  useState([]);
     const [filter, setFilter] = useState({category: [], color: [], price:{min:0, max:0}});
     const [naviger, setNaviger] = useState(['accueil', 'produits']);
-    const {CategoryId} = useParams();
+    const {CategoryId, Search} = useParams();
 
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
 
@@ -22,24 +22,34 @@ export default function Products(){
 
     useEffect(()=>{
         const produits= new Produits(urlBase);
-        produits.getProducts().then(p=>{
-            prods= p.slice(0);
-            setProds(prods);
-            
-            if (CategoryId > 0){
-                let cf= [parseInt(CategoryId, 10)];
-                handleFilterCategory(cf);
-            } else {
-                handleFilterCategory([]);
-            }
+        
+        if (Search !== undefined){
+            produits.searchProducts(Search).then(p=>{
+                prods= p.slice(0);
+                setProds(prods.slice(0)); 
+                handleFilterCategory([]);   
+            }).catch(error=>{
+                setAlert({Etat: true, Titre: 'PRODUITS - Error search products', Type: 'ERROR', Message: error.message});
+                console.log(error);
+            });
+        } else {
+            produits.getProducts().then(p=>{
+                prods= p.slice(0);
+                setProds(prods);
+                
+                if (CategoryId > 0){
+                    let cf= [parseInt(CategoryId, 10)];
+                    handleFilterCategory(cf);
+                } else {
+                    handleFilterCategory([]);
+                }
 
-        }).catch(error=>{
-            setAlert({Etat: true, Titre: 'PRODUITS - Error list all products', Type: 'ERROR', Message: error.message});
-            console.log(error);
-        });
-        
-        
-    }, [CategoryId]);
+            }).catch(error=>{
+                setAlert({Etat: true, Titre: 'PRODUITS - Error list all products', Type: 'ERROR', Message: error.message});
+                console.log(error);
+            });
+        }
+    }, [CategoryId, Search]);
 
 
     function onFermerAlert(){
