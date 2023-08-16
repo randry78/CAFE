@@ -27,6 +27,7 @@ function App() {
     const [ModalStyle, setModalStyle]= useState({Etat: false, Theme:''});
     const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
     const [panier, setPanier] = useState(0);
+    const [wishlist, setWishlist] = useState(0);
 
     useEffect(()=>{
         import ('./ThemeStyle/'+ThemeStyle);
@@ -68,10 +69,14 @@ function App() {
         setPanier(article);
     }
 
+    function handleWishList(article){
+        setWishlist(article);
+    }
+
     return (
         <>
                 <Heads panier= {panier}/>
-                <Header  panier={panier} onChangeThemeStyle={handleChangeThemeStyle}/>
+                <Header  panier={panier} wishlist={wishlist} onChangeThemeStyle={handleChangeThemeStyle}/>
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
@@ -79,7 +84,7 @@ function App() {
                     <Route path="/Wishlist" element={<WishList />} />
                     <Route path="/Carts" element={<Paniers onPanier= {handlePanier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />
-                    <Route path="/ProductDetail/:id" element={<ProductDetail onPanier= {handlePanier}/>} />
+                    <Route path="/ProductDetail/:id" element={<ProductDetail onPanier= {handlePanier} onWishList={handleWishList}/>} />
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
                     <Route path="/AJOUTCAFE" element={<Ajout/>}/>

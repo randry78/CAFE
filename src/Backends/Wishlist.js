@@ -1,4 +1,4 @@
-export class WishList{
+export default class WishList{
     urlBase= '';
 
     constructor (urlBase){
