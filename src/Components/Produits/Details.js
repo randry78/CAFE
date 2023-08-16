@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import Produits from '../../Backends/Produits';
 import FormAddPanier from './FormAddPanier';
 import DetailDescription from './DetailDescription';
+import { Badge} from 'react-bootstrap';
+import { GiHearts } from "react-icons/gi";
 
-export default function Detail({id, onPanier}){
+export default function Detail({id}){
 
     const [prod, setProd] =  useState();
 
@@ -34,7 +36,7 @@ export default function Detail({id, onPanier}){
                         <img src={prod?prod.image:''} alt="" style={{width: '40rem'}} className='py-0 px-0'/>
                     </div>
                     <div className='border ms-2 px-5 py-4 w-100'>
-                        <h1 className='mb-4'>{prod?prod.name:''}</h1>
+                        <h1 className='mb-4'>{prod?prod.name:''}<GiHearts className="mx-1 text-danger ms-5" style={{fontSize:'25px'}} /></h1>
                         <h3 className='fw-bold'>{new Intl.NumberFormat().format(prod?prod.price:0)} $</h3>
                         <p className='my-4'>{prod?prod.description:''}</p>
                         <p><span className='fw-bold'>Catégorie: </span><span>{prod?prod.category.name:''}</span></p>

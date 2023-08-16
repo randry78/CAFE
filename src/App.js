@@ -83,6 +83,7 @@ function App() {
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
                     <Route path="/AJOUTCAFE" element={<Ajout/>}/>
+                    <Route path="/FAVORI" element={<WishList/>}/>
                 </Routes>
                 <Footer/>
 
