@@ -7,7 +7,7 @@ import { Badge} from 'react-bootstrap';
 import { GiHearts } from "react-icons/gi";
 
 export default function Detail({id}){
-    
+
     const [prod, setProd] =  useState();
 
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
@@ -41,7 +41,7 @@ export default function Detail({id}){
                         <p className='my-4'>{prod?prod.description:''}</p>
                         <p><span className='fw-bold'>Catégorie: </span><span>{prod?prod.category.name:''}</span></p>
                         <p><span className='fw-bold'>Couleur: </span><span style={{color: prod?prod.color.hexCode:''}}>{prod?prod.color.name:''}</span> <span className='px-2 ms-2' style={{border: '1px solid', color: prod?prod.color.hexCode:'', backgroundColor: prod?prod.color.hexCode:''}}>C</span></p>
-                        <FormAddPanier id={id} name={prod?prod.name:''} />                    
+                        <FormAddPanier id={id} name={prod?prod.name:''} onPanier={onPanier}/>                    
                   </div>
                 </div>
                 <DetailDescription />

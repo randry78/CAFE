@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Carts } from "../../Backends/Carts";
 import { Alerts } from '../Communs/Alerts';
 
-export default function FormAddPanier({id, name}){
+export default function FormAddPanier({id, name, onPanier}){
     const [qte, setQte] = useState(1);
     const [qt, setQt] = useState(1);
     const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
@@ -52,7 +52,7 @@ export default function FormAddPanier({id, name}){
         paniers.add(id, qte).then(()=>{
             setAlert({Etat: true, Titre: 'PANIER - Ajout panier', Type: 'SUCCESS', Message: 'Ajout de produit dans le panier avec succés !  Produit: '+name+' - Quantité: '+qte});
             paniers.getAll().then((p)=>{
-                
+                onPanier(p.length);
             }).catch(error=>{
                 setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
             });
