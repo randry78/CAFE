@@ -13,6 +13,7 @@ import '../src/ThemeStyle/Bootswatch_bootstrap.min.css';
 import Abouts from './Pages/Abouts';
 import WishList from './Pages/WishList';
 import Cafe from "./Pages/Cafe";
+import Ajout from "./Pages/Ajout";
 import { useEffect, useState } from 'react';
 import ProductDetail from "./Pages/ProductDetail";
 import Paniers from "./Pages/Paniers";
@@ -69,6 +70,7 @@ function App() {
                     <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
+                    <Route path="/AJOUTCAFE" element={<Ajout/>}/>
                 </Routes>
                 <Footer/>
 

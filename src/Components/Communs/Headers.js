@@ -69,9 +69,14 @@ export default function Header({onMonProfil, onUserDisConnect, onCategorie, onCh
                                     ))}
                                 </NavDropdown>
                                 
-                                <Nav.Link onClick={()=>{navigate('/PRODUCTS')}} className='NavLink  mx-3 d-flex justify-content-start text-black align-items-center flex-wrap'><GiCoffeeCup className="mx-2" style={{fontSize:'40px'}}/>PRODUITS</Nav.Link>
-                                <Nav.Link onClick={()=>{navigate('/ABOUTS')}} className='NavLink d-flex justify-content-start align-items-center flex-wrap'><BsFillExclamationCircleFill className="mx-2" style={{fontSize:'40px'}} />A PROPOS</Nav.Link>
-                                <Nav.Link onClick={()=>{navigate('/CAFE')}} className='NavLink  mx-3 d-flex justify-content-start text-black align-items-center flex-wrap'><GiCoffeeCup className="mx-2" style={{fontSize:'40px'}}/>CAFÉ</Nav.Link>
+                                    <Nav.Link onClick={()=>{navigate('/PRODUCTS')}} className='NavLink  mx-3 d-flex justify-content-start text-black align-items-center flex-wrap'><GiCoffeeCup className="mx-2" style={{fontSize:'40px'}}/>PRODUITS</Nav.Link>
+                                    <Nav.Link onClick={()=>{navigate('/ABOUTS')}} className='NavLink d-flex justify-content-start align-items-center flex-wrap'><BsFillExclamationCircleFill className="mx-2" style={{fontSize:'40px'}} />A PROPOS</Nav.Link>
+                                
+                                <NavDropdown align='start' title={<span><GiCoffeeCup className="mx-2" style={{fontSize:'40px'}}/><span>CAFE</span></span>} className='bg-black mx-lg-5 px-lg-5'>
+                                    <NavDropdown.Item  onClick={()=>{navigate('/CAFE')}} className='NavLink  d-flex justify-content-start text-black align-items-center flex-wrap '>CAFÉ</NavDropdown.Item >
+                                    <NavDropdown.Item  onClick={()=>{navigate('/AJOUTCAFE')}} className='NavLink  d-flex justify-content-start text-black align-items-center flex-wrap '>AJOUTER UN NOUVEAU CAFÉ</NavDropdown.Item >
+                                </NavDropdown>
+                            
                             </Nav>
                             <Nav className="d-flex justify-content-start">
                                 <Nav.Link className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>3</span></Badge><span className='d-lg-none ms-2'>COUP DE COEUR</span></Nav.Link>
