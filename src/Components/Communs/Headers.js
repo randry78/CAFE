@@ -65,7 +65,7 @@ export default function Header({panier, onMonProfil, onUserDisConnect, onChangeT
                             <Nav className="me-auto border-0">
                                 <NavDropdown align='start' title={<span><BiCategoryAlt className="mx-2" style={{fontSize:'40px'}}/><span>CATÉGORIES</span></span>} className='bg-black mx-lg-5 px-lg-5'>
                                     {categories.map(item=>(
-                                        <NavDropdown.Item onClick={()=>{navigate('/Products/'+item.id)}} key={item.id} data-toggle-second="tooltip" title= {item.description} data-placement="right" aria-haspopup="true" aria-expanded="false"  className='d-flex align-items-center w-100'>{iconCategory(item.name)} {item.name}</NavDropdown.Item>                                        
+                                        <NavDropdown.Item onClick={()=>{navigate('/Products/'+item.id+'/null')}} key={item.id} data-toggle-second="tooltip" title= {item.description} data-placement="right" aria-haspopup="true" aria-expanded="false"  className='d-flex align-items-center w-100'>{iconCategory(item.name)} {item.name}</NavDropdown.Item>                                        
                                     ))}
                                 </NavDropdown>
                                 

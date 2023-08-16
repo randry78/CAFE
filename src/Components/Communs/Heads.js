@@ -51,10 +51,10 @@ export default function Heads() {
                                     </div>
                                 </Navbar.Brand>
                             </Nav.Link>
-                            <Form className="d-flex ms-5 ms-lg-0">
+                            <div className="d-flex ms-5 ms-lg-0">
                                 <Form.Control onChange={(event)=>handleChangeSearch(event)} onKeyUp={(event)=>handleKeyUp(event)} value={search} type="search" placeholder="Recherche des produits" className="border-primary me-0 rounded-0" aria-label="Recherche"/>
                                 <Button disabled= {etatButton?true:false} onClick={()=>handleClickSearch()} variant="outline-primary" className='rounded-0 ms-0'><BiSearchAlt className='text-black' style={{fontSize:"25px"}} /></Button>
-                            </Form>
+                            </div>
                             <div className='me-5 d-sm-flex d-none flex-column align-items-center'>
                                 <p className='my-0 fw-bold'>Service Client</p>
                                 <h4 className='my-0'>+1 438 226 9031</h4>
