@@ -24,6 +24,7 @@ function App() {
     const [ThemeStyle, setThemeStyle]= useState('Cerulean_bootstrap.min.css');
     const [ModalStyle, setModalStyle]= useState({Etat: false, Theme:''});
     const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
+    const [panier, setPanier] = useState(0);
 
     useEffect(()=>{
         import ('./ThemeStyle/'+ThemeStyle);
@@ -57,13 +58,13 @@ function App() {
     return (
         <>
                 <Heads />
-                <Header  onChangeThemeStyle={handleChangeThemeStyle}/>
+                <Header  panier={panier} onChangeThemeStyle={handleChangeThemeStyle}/>
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
                     <Route path="/Products/:CategoryId" element={<Products />} />
                     <Route path="/Wishlist" element={<WishList />} />
-                    <Route path="/Carts" element={<Paniers />} />
+                    <Route path="/Carts" element={<Paniers panier= {panier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />
                     <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                     <Route path="*" element={<Home />} />

@@ -51,6 +51,11 @@ export default function FormAddPanier({id, name}){
         const paniers= new Carts(urlBase);
         paniers.add(id, qte).then(()=>{
             setAlert({Etat: true, Titre: 'PANIER - Ajout panier', Type: 'SUCCESS', Message: 'Ajout de produit dans le panier avec succés !  Produit: '+name+' - Quantité: '+qte});
+            paniers.getAll().then((p)=>{
+                
+            }).catch(error=>{
+                setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
+            });
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
         });
