@@ -3,6 +3,8 @@ import Heads from './Components/Communs/Heads';
 import Header from './Components/Communs/Headers';
 import Footer from './Components/Communs/Footers';
 
+import WishLists from './Backends/Wishlist';
+
 import { ModalStyleTheme } from './Components/Communs/Theme';
 import { Alerts } from './Components/Communs/Alerts';
 
@@ -39,7 +41,7 @@ function App() {
             setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
         });
 
-        const wishlist= new WishList(urlBase);
+        const wishlist= new WishLists(urlBase);
         wishlist.getAll().then((p)=>{
             setWishlist(p.length);
         }).catch(error=>{
