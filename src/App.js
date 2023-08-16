@@ -17,6 +17,7 @@ import Ajout from "./Pages/Ajout";
 import { useEffect, useState } from 'react';
 import ProductDetail from "./Pages/ProductDetail";
 import Paniers from "./Pages/Paniers";
+import { Carts } from "./Backends/Carts";
 
 
 
@@ -29,6 +30,13 @@ function App() {
 
     useEffect(()=>{
         import ('./ThemeStyle/'+ThemeStyle);
+        const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
+        const paniers= new Carts(urlBase);
+        paniers.getAll().then((p)=>{
+            setPanier(p.length);
+        }).catch(error=>{
+            setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
+        });
     }, [ThemeStyle]);
 
 
@@ -56,18 +64,22 @@ function App() {
         setAlert({Etat: false});
     }
 
+    function handlePanier(article){
+        setPanier(article);
+    }
+
     return (
         <>
-                <Heads />
+                <Heads panier= {panier}/>
                 <Header  panier={panier} onChangeThemeStyle={handleChangeThemeStyle}/>
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
                     <Route path="/Products/:CategoryId" element={<Products />} />
                     <Route path="/Wishlist" element={<WishList />} />
-                    <Route path="/Carts" element={<Paniers panier= {panier}/>} />
+                    <Route path="/Carts" element={<Paniers onPanier= {handlePanier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />
-                    <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+                    <Route path="/ProductDetail/:id" element={<ProductDetail onPanier= {handlePanier}/>} />
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
                     <Route path="/AJOUTCAFE" element={<Ajout/>}/>
