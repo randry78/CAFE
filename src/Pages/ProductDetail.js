@@ -18,7 +18,7 @@ export default function ProductDetail(){
             <div style={{height: '100%'}}>
                 <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
                     <Navigation nav={['accueil', 'produits', 'detail']}/>
-                    <Detail id= {id}/>
+                    <Detail id= {id} />
                 </div>
             </div>
 
