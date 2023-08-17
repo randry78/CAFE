@@ -1,5 +1,4 @@
 import Navigation from "../Components/Produits/Navigation";
-import PageNavigation from "../Components/Produits/Paginations";
 import ListProduits from "../Components/Produits/Produits";
 import FiltrePrix from '../Components/Produits/FiltrePrix';
 import FiltreCouleur from "../Components/Produits/FiltreCouleur";
@@ -202,7 +201,6 @@ export default function Products(props){
                         </div>
                         <div className="col-lg-9 mx-0 px-0">
                             <ListProduits lists= {prodsFilter} />
-                            <PageNavigation />
                         </div>
                     </div>
                 </div>

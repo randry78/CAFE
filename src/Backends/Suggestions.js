@@ -1,11 +1,11 @@
-export class Suggestions{
+export default class Suggestions{
     urlBase= '';
 
     constructor (urlBase){
        this.urlBase= urlBase; 
     }
 
-    async getSuggestions(){
+    async getAll(){
         const url= this.urlBase+'suggestions/recently-viewed-products';
         const response= await fetch(url, {method:'GET'});
         if (!response.ok) {
@@ -16,14 +16,12 @@ export class Suggestions{
         return suggestions;
     }
 
-    async getSuggestion(id){
+    async delete(id){
         const url= this.urlBase+'suggestions/recently-viewed-products/' + id;
-        const response= await fetch(url, {method:'GET'});
+        const response= await fetch(url, {method:'DELETE'});
         if (!response.ok) {
             const error= await response.json();
             throw error;
         }
-        const suggestion= await response.json();
-        return suggestion;
     }
 }

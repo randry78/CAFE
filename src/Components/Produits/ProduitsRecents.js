@@ -1,5 +1,5 @@
 import {Button, Card, Badge} from 'react-bootstrap';
-import Produits from '../../Backends/Produits';
+import Suggestions from '../../Backends/Suggestions';
 import { useEffect, useState } from 'react';
 import { BsCartPlus } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
@@ -19,10 +19,9 @@ export default function RecentsProducts(){
     const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
 
     useEffect(()=>{
-        const produits= new Produits(urlBase);
-        produits.getProducts().then(p=>{
-            let pReverse= p.reverse().slice(0, 4);
-            setProds(pReverse);
+        const suggestions= new Suggestions(urlBase);
+        suggestions.getAll().then(p=>{
+            setProds(p.slice(0, 4));
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'Error list all products', Type: 'ERROR', Message: error.message});
             console.log(error);
