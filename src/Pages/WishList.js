@@ -86,7 +86,7 @@ export default function WishList({onWishList}){
                 <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
                     <div className= 'd-flex align-items-center justify-content-between'>
                         <Navigation nav={['accueil', 'wishlist']} />
-                        <Button onClick={()=>handleClear()} className='text-nowrap' variant='danger'><IoIosHeartDislike className= 'me-2'/>Vider la liste</Button>
+                        <Button disabled={wishlist.length===0?true:false} onClick={()=>handleClear()} className='text-nowrap' variant='danger'><IoIosHeartDislike className= 'me-2'/>Vider la liste</Button>
                     </div>
                     <div className='d-flex flex-row flex-wrap justify-content-evenly'>
                     {wishlist.map(item=>(
