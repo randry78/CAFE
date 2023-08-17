@@ -90,7 +90,7 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
                     <Route path="/Products/:CategoryId/:Search" element={<Products />} />
-                    <Route path="/Wishlist" element={<WishList />} />
+                    <Route path="/Wishlist" element={<WishList onWishList={handleWishList}/>} />
                     <Route path="/Carts" element={<Paniers onPanier= {handlePanier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />
                     <Route path="/ProductDetail/:id" element={<ProductDetail onPanier= {handlePanier} onWishList={handleWishList}/>} />

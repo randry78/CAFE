@@ -41,8 +41,9 @@ export default function WishList({onWishList}){
           case 1: // suppression article
               wishlists.delete(Modal.Data.id).then(()=>{
                   setAlert({Etat: true, Titre: 'WISHLIST - Suppression de liste souhait', Type: 'SUCCESS', Message: 'Suppression de liste a souhait "'+Modal.Data.name+'" avec succés !'});
-                  wishlists.getAll().then((p)=>{
-                      onWishList(p.length);
+                  wishlists.getAll().then(p=>{
+                    onWishList(p.length);
+                    setWishlist(p);
                   }).catch(error=>{
                       setAlert({Etat: true, Titre: 'WISHLIST - Error Total item on wishlist', Type: 'ERROR', Message: error.message});
                   });
@@ -53,8 +54,9 @@ export default function WishList({onWishList}){
           case 2: // vidage du panier
               wishlists.clear().then(()=>{
                   setAlert({Etat: true, Titre: 'PANIER - Vidange du panier', Type: 'SUCCESS', Message: 'La list a été vidé avec succés !'});
-                  wishlists.getAll().then((p)=>{
-                      onWishList(p.length);
+                  wishlists.getAll().then(p=>{
+                    onWishList(p.length);
+                    setWishlist(p);
                   }).catch(error=>{
                       setAlert({Etat: true, Titre: 'WISHLIST - Error Total item on wishlist', Type: 'ERROR', Message: error.message});
                   });
