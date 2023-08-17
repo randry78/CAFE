@@ -1,5 +1,5 @@
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
-import { GiCoffeeCup } from "react-icons/gi";
+import { GiCoffeeCup, GiHearts } from "react-icons/gi";
 import { BiCategoryAlt, BiSolidDetail } from "react-icons/bi";
 import { IoIosColorPalette } from "react-icons/io";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
@@ -28,6 +28,14 @@ export default function Navigation({nav}) {
                 b.path= '/Products';
                 b.active= true;
                 b.icon= <GiCoffeeCup className="me-1 fs-4"/>;
+                breadcrumd.push(Object.create(b));
+                break;
+            case 'wishlist':
+                b={}
+                b.name= 'Wishlists';
+                b.path= '/Wishlists';
+                b.active= true;
+                b.icon= <GiHearts className="me-1 fs-4"/>;
                 breadcrumd.push(Object.create(b));
                 break;
             case 'detail':
@@ -70,7 +78,7 @@ export default function Navigation({nav}) {
   
 
   return (
-    <Breadcrumb className='mx-4 my-4'>
+    <Breadcrumb className='mx-4 my-4 align-middle w-100'>
         {navToArray(nav).map((item, index)=>(
             <Breadcrumb.Item key={index} active= {!item.active?true:index === navToArray(nav).length-1?true:false} className='border-0' onClick={()=>{navigate(item.path)}} > {item.icon} {item.name}</Breadcrumb.Item>
         ))}
