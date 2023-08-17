@@ -93,7 +93,7 @@ function App() {
                     <Route path="/Wishlist" element={<WishList onWishList={handleWishList}/>} />
                     <Route path="/Carts" element={<Paniers onPanier= {handlePanier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />
-                    <Route path="/ProductDetail/:id" element={<ProductDetail Wishlist= {wishlist} onPanier= {handlePanier} onWishList={handleWishList}/>} />
+                    <Route path="/ProductDetail/:id" element={<ProductDetail WishList= {wishlist} onPanier= {handlePanier} onWishList={handleWishList}/>} />
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
                     <Route path="/AJOUTCAFE" element={<Ajout/>}/>

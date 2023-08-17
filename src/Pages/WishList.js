@@ -89,7 +89,7 @@ export default function WishList({onWishList}){
                         <Button onClick={()=>handleClear()} className='text-nowrap' variant='danger'><IoIosHeartDislike className= 'me-2'/>Vider la liste</Button>
                     </div>
                     <div className='d-flex flex-row flex-wrap justify-content-evenly'>
-                          {wishlist.map(item=>(
+                    {wishlist.map(item=>(
                               <Card  key={item.id} className='mx-2 my-3 border-0 border-top border-start border-primary border-3 rounded-4' style={{ cursor: 'pointer', width: '16rem', height: '20rem', maxHeight: '20rem',
                                   boxShadow: '15px 10px 15px 0px rgba(0,0,0,0.2)' }}>
                                   <Card.Img className='d-flex align-items-start mt-2' variant="top" src= {item.image} style={{width: '100%', height: '40%', objectFit: 'contain'}} />

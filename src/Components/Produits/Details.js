@@ -44,6 +44,16 @@ export default function Detail({id, WishList, onPanier, onWishList}){
         });
     }
 
+    function isExistWishlist(item){
+        const isExist = (element) => element.id === item.id;
+        const index= WishList.findIndex(isExist);
+        if (index===-1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     return (
         <>
             <div style={{height: '100%'}} className='mx-4'>
@@ -59,7 +69,7 @@ export default function Detail({id, WishList, onPanier, onWishList}){
                         <p><span className='fw-bold'>Couleur: </span><span style={{color: prod?prod.color.hexCode:''}}>{prod?prod.color.name:''}</span> <span className='px-2 ms-2' style={{border: '1px solid', color: prod?prod.color.hexCode:'', backgroundColor: prod?prod.color.hexCode:''}}>C</span></p>
                         <FormAddPanier id={id} name={prod?prod.name:''} onPanier={onPanier}/>   
                         <div>
-                            <Button disabled={WishList.length===0?true:false} onClick={()=>{handleWishlist(prod)}}><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} />Enregistrer au liste</Button>
+                            <Button disabled={prod?isExistWishlist(prod)?true:false:false} onClick={()=>{handleWishlist(prod)}}><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} />Enregistrer au liste</Button>
                         </div>                 
                   </div>
                 </div>
