@@ -18,8 +18,8 @@ export default function WishList({onWishList}){
 
     useEffect(() => {
         const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
-        const wishlist= new WishLists(urlBase);
-        wishlist.getAll().then((p)=>{
+        const wishlists= new WishLists(urlBase);
+        wishlists.getAll().then((p)=>{
             setWishlist(p);
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'WISHLIST - Error list wishlist', Type: 'ERROR', Message: error.message});
@@ -49,8 +49,8 @@ export default function WishList({onWishList}){
               wishlists.delete(Modal.Data.id).then(()=>{
                   setAlert({Etat: true, Titre: 'WISHLIST - Suppression de liste souhait', Type: 'SUCCESS', Message: 'Suppression de liste a souhait "'+Modal.Data.name+'" avec succés !'});
                   wishlists.getAll().then(p=>{
-                    onWishList(p.length);
-                    setWishlist(p);
+                    onWishList(p.splice(0));
+                    setWishlist(p.splice(0));
                   }).catch(error=>{
                       setAlert({Etat: true, Titre: 'WISHLIST - Error Total item on wishlist', Type: 'ERROR', Message: error.message});
                   });
@@ -62,8 +62,8 @@ export default function WishList({onWishList}){
               wishlists.clear().then(()=>{
                   setAlert({Etat: true, Titre: 'PANIER - Vidange du panier', Type: 'SUCCESS', Message: 'La list a été vidé avec succés !'});
                   wishlists.getAll().then(p=>{
-                    onWishList(p.length);
-                    setWishlist(p);
+                    onWishList(p.splice(0));
+                    setWishlist(p.splice(0));
                   }).catch(error=>{
                       setAlert({Etat: true, Titre: 'WISHLIST - Error Total item on wishlist', Type: 'ERROR', Message: error.message});
                   });

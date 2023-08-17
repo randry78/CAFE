@@ -29,7 +29,7 @@ function App() {
     const [ModalStyle, setModalStyle]= useState({Etat: false, Theme:''});
     const [Alert, setAlert]=useState({Etat: false, Titre: '', Type: '', Message: ''});
     const [panier, setPanier] = useState(0);
-    const [wishlist, setWishlist] = useState(0);
+    const [wishlist, setWishlist] = useState([]);
 
     useEffect(()=>{
         import ('./ThemeStyle/'+ThemeStyle);
@@ -41,9 +41,9 @@ function App() {
             setAlert({Etat: true, Titre: 'PANIER - Error add products', Type: 'ERROR', Message: error.message});
         });
 
-        const wishlist= new WishLists(urlBase);
-        wishlist.getAll().then((p)=>{
-            setWishlist(p.length);
+        const wishlists= new WishLists(urlBase);
+        wishlists.getAll().then((p)=>{
+            setWishlist(p);
         }).catch(error=>{
             setAlert({Etat: true, Titre: 'WISHLIST - Error list wishlist', Type: 'ERROR', Message: error.message});
         });
@@ -85,7 +85,7 @@ function App() {
     return (
         <>
                 <Heads panier= {panier}/>
-                <Header  panier={panier} wishlist={wishlist} onChangeThemeStyle={handleChangeThemeStyle}/>
+                <Header  panier={panier} WishList={wishlist} onChangeThemeStyle={handleChangeThemeStyle}/>
                 <Routes>
                     <Route index element={<Home />} />
                     <Route path="/Products" element={<Products />} />
@@ -93,7 +93,7 @@ function App() {
                     <Route path="/Wishlist" element={<WishList onWishList={handleWishList}/>} />
                     <Route path="/Carts" element={<Paniers onPanier= {handlePanier}/>} />
                     <Route path="/Abouts" element={<Abouts />} />
-                    <Route path="/ProductDetail/:id" element={<ProductDetail onPanier= {handlePanier} onWishList={handleWishList}/>} />
+                    <Route path="/ProductDetail/:id" element={<ProductDetail Wishlist= {wishlist} onPanier= {handlePanier} onWishList={handleWishList}/>} />
                     <Route path="*" element={<Home />} />
                     <Route path="/CAFE" element={<Cafe/>}/>
                     <Route path="/AJOUTCAFE" element={<Ajout/>}/>

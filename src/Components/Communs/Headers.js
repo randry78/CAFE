@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import './Styles/headers.css';
 
 
-export default function Header({panier, wishlist, onMonProfil, onUserDisConnect, onChangeThemeStyle}) {
+export default function Header({panier, WishList, onMonProfil, onUserDisConnect, onChangeThemeStyle}) {
     const navigate= useNavigate();
 
     const urlBase= 'https://insta-api-api.0vxq7h.easypanel.host/';
@@ -79,7 +79,7 @@ export default function Header({panier, wishlist, onMonProfil, onUserDisConnect,
                             
                             </Nav>
                             <Nav className="d-flex justify-content-start">
-                                <Nav.Link disabled={wishlist===0?true:false } onClick={()=>{navigate('/Wishlist/')}}  className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>{wishlist}</span></Badge><span className='d-lg-none ms-2'>COUP DE COEUR</span></Nav.Link>
+                                <Nav.Link disabled={WishList.length===0?true:false } onClick={()=>{navigate('/Wishlist/')}}  className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>{WishList}</span></Badge><span className='d-lg-none ms-2'>COUP DE COEUR</span></Nav.Link>
                                 <Nav.Link disabled={panier===0?true:false } onClick={()=>{navigate('/Carts/')}} className='d-flex justify-content-start align-items-center flex-wrap'><Badge bg="black"><BsCart4 className="mx-1 text-ligth" style={{fontSize:'25px'}} /><span className='text-primary d-flex align-items-end justify-content-end'>{panier}</span></Badge><span className='d-lg-none ms-2'>PANIER</span></Nav.Link>
                                 <NavDropdown align='end' title={<span><BiSolidUserCircle style={{fontSize:"40px"}} /><span className="d-lg-none">UTILISATEURS</span></span>} id="navbarScrollingDropdown" className='fw-bold mx-0 my-0'>
                                     <NavDropdown.Item disabled href="#" onClick={onMonProfil} className='d-flex align-items-center'><BiSolidUserRectangle className="me-2" style={{fontSize:'25px'}}/>Mon Profil</NavDropdown.Item>

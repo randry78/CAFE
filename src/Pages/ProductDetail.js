@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { useState } from 'react';
 import Detail from "../Components/Produits/Details";
 
-export default function ProductDetail({onPanier, onWishList}){
+export default function ProductDetail({WishList, onPanier, onWishList}){
     const {id} = useParams();
 
     const [Alert, setAlert]= useState({Etat: false, Titre: '', Type: '', Message: ''});
@@ -18,7 +18,7 @@ export default function ProductDetail({onPanier, onWishList}){
             <div style={{height: '100%'}}>
                 <div style={{height: 'calc(100vh - 200px)', overflowY: 'scroll', overflowX: 'hidden'}}>
                     <Navigation nav={['accueil', 'produits', 'detail']}/>
-                    <Detail id= {id} onPanier={onPanier} onWishList={onWishList}/>
+                    <Detail id={id} WishList={WishList} onPanier={onPanier} onWishList={onWishList}/>
                 </div>
             </div>
 

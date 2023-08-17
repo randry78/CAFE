@@ -1,13 +1,13 @@
 import { Alerts } from '../../Components/Communs/Alerts';
 import { useEffect, useState } from 'react';
 import Produits from '../../Backends/Produits';
-import WishList from '../../Backends/Wishlist';
+import WishLists from '../../Backends/Wishlist';
 import FormAddPanier from './FormAddPanier';
 import DetailDescription from './DetailDescription';
 import { Button } from 'react-bootstrap';
 import { GiHearts } from "react-icons/gi";
 
-export default function Detail({id, onPanier, onWishList}){
+export default function Detail({id, WishList, onPanier, onWishList}){
 
     const [prod, setProd] =  useState();
 
@@ -30,11 +30,11 @@ export default function Detail({id, onPanier, onWishList}){
     }
 
     function handleWishlist(article){
-        const wishlist= new WishList(urlBase);
-        wishlist.add(id).then(()=>{
+        const wishlists= new WishLists(urlBase);
+        wishlists.add(id).then(()=>{
             setAlert({Etat: true, Titre: 'WISHLIST - Ajout liste a souhait', Type: 'SUCCESS', Message: 'Ajout de produit dans la liste a souhait avec succés !  Produit: '+article.name}); 
-            wishlist.getAll().then((p)=>{
-                onWishList(p.length);
+            wishlists.getAll().then((p)=>{
+                onWishList(p);
             }).catch(error=>{
                 setAlert({Etat: true, Titre: 'WISHLIST - Error list wishlist', Type: 'ERROR', Message: error.message});
             });
@@ -59,7 +59,7 @@ export default function Detail({id, onPanier, onWishList}){
                         <p><span className='fw-bold'>Couleur: </span><span style={{color: prod?prod.color.hexCode:''}}>{prod?prod.color.name:''}</span> <span className='px-2 ms-2' style={{border: '1px solid', color: prod?prod.color.hexCode:'', backgroundColor: prod?prod.color.hexCode:''}}>C</span></p>
                         <FormAddPanier id={id} name={prod?prod.name:''} onPanier={onPanier}/>   
                         <div>
-                            <Button onClick={()=>{handleWishlist(prod)}}><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} />Enregistrer au liste</Button>
+                            <Button disabled={WishList.length===0?true:false} onClick={()=>{handleWishlist(prod)}}><GiHearts className="mx-1 text-danger" style={{fontSize:'25px'}} />Enregistrer au liste</Button>
                         </div>                 
                   </div>
                 </div>
