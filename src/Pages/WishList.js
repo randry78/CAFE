@@ -30,7 +30,7 @@ export default function WishList({onWishList}){
     }
 
     function handleDelete(item){
-        setModal({Action: 1, Etat: true, Type: 'ERROR', Titre: 'PANIER - SUPPRESSION ARTICLES...', 
+        setModal({Action: 1, Etat: true, Type: 'ERROR', Titre: 'WISHLIST - SUPPRESSION WISHLIST...', 
         Message: 'Vous voulez vraiment supprimer cet article "'+item.name+'" ?', TxtBtnConfirmer:'Supprimer', TxtBtnAnnuler: 'Annuler', Data: item});
     }
 
